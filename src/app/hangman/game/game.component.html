@@ -1,0 +1,17 @@
+<div id="main">
+  <h1>Choose a category</h1>
+  <div>
+    <label for="options">Choose an option:</label>
+    <select [(ngModel)]="selectedOption" (change)="onSelectWordChange()" id="options">
+      <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+    </select>
+    <button (click) = "getRandomWord()">Play!</button>
+    <div>{{unknownWord}}</div> 
+    <label for="options">Choose an option:</label>
+    <select [(ngModel)]="selectedLetter" (change)="onSelectLetterChange()" id="options">
+      <option *ngFor="let letter of letters" [value]="letter"> 
+        {{ letter }}</option>
+    </select>
+    <button (click)="checkRandomWord()">Play!</button>
+  </div>
+</div>

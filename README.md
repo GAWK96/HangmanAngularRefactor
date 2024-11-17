@@ -1,3 +1,5 @@
+This Angular-based Hangman game, created with HTML and CSS, challenges players to guess a hidden word within limited attempts. Angular handles the game logic, providing a responsive and interactive experience. Styled with a clean CSS interface, the project demonstrates key Angular features, including data binding and component organization.
+
 # HangmanGame
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.

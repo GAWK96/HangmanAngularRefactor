@@ -1,17 +1,47 @@
 <div id="main">
-  <h1>Choose a category</h1>
-  <div>
-    <label for="options">Choose an option:</label>
-    <select [(ngModel)]="selectedOption" (change)="onSelectWordChange()" id="options">
+  <div id="selectTypeWord">
+  <div id="selector">
+      <h1 style="margin: 5px">Choose a category</h1><br>
+    <!-- <label for="options">Choose an type of word:</label><br> -->
+    <select [(ngModel)]="selectedOption" (change)="onSelectWordChange()" [disabled]="disableWordSelected" id="options">
       <option *ngFor="let option of options" [value]="option">{{ option }}</option>
     </select>
-    <button (click) = "getRandomWord()">Play!</button>
-    <div>{{unknownWord}}</div> 
-    <label for="options">Choose an option:</label>
+    <button (click) = "getRandomWord()" [disabled]="disableWordSelected">Play!</button>
+    </div>
+    </div>
+    <div id="selector">
+      <h1 style="margin: 5px">Choose a letter</h1><br>
+    <!-- <label for="options">Choose an option:</label> -->
     <select [(ngModel)]="selectedLetter" (change)="onSelectLetterChange()" id="options">
-      <option *ngFor="let letter of letters" [value]="letter"> 
+      <option *ngFor="let letter of letters" [value]="letter" [disabled] = "isLetterDisabled(letter)"> 
         {{ letter }}</option>
     </select>
-    <button (click)="checkRandomWord()">Play!</button>
+    <button (click)="checkRandomWord()" [disabled]="disableLetterSelect">Select letter!</button>
+    </div>
   </div>
-</div>
+  <div *ngIf="count < 6 && (checkIfGuessed || unknownWord?.length === 0 || unknownWord.length > 0) && stillPlaying"><img [src]="'assets/HANG' + count + '.png'" alt="">
+    <div>{{unknownWord}}</div>
+  </div>
+    {{ checkIfGuessed }}
+    {{ count }}
+    {{ stillPlaying }}
+  <!-- <div *ngIf="count >= 6" id="endGame">
+    <div><h1>Oh no! Try again!</h1></div>
+    <img src="assets/endGame.png" alt=""></div> -->
+  <div *ngIf="count >= 6 && checkIfGuessed" id="endGame">
+    <div>
+      <h1>Oh no! Try again!</h1>
+      <button (click)='reloadPage()'>Play again!</button>
+      <button (click)='goToHome()'>Go to home page!</button>
+    </div>
+    <img src="assets/endGame.png" alt="">
+  </div>
+  <div *ngIf="count < 6 && !checkIfGuessed && !stillPlaying" id="endGame">
+    <div>
+      <h1>Guessed it! Congrats!</h1>
+      <button (click)='reloadPage()'>Play again!</button>
+      <button (click)='goToHome()'>Go to home page!</button>
+    </div>
+    <img src="assets/hangmann_balloons_game.png" alt="">
+    </div>
+  {{ 'assets/HANG' + count + '.png' }}

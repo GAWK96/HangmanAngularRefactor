@@ -1,14 +1,74 @@
 #main {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* display: grid;
+    grid-template-columns: 1fr 1fr; */
 }
 
-#main #endGame {
+#main #gameOptions {
     display: grid;
+    grid-template-columns: 2fr 2fr;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+#main .endGame .result {
+    display: flex; 
     flex-direction: column;
-    grid-template-columns: 1fr 1fr;
-    margin-left: 300px;
-    margin-right: 300px;
+    align-items: center;
+}
+
+/* #main .endGame .result .message {
+    height: 100px
+} */
+
+#main .endGame .result .resultOptions {
+    display: flex;
+    flex-direction: row;
+        align-items: end;
+            text-align: end;
+}
+
+#main .endGame .result .resultOptions .resultOptionsButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#main .endGame .result .resultOptions .resultOptionsWord {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-left: 20px;
+}
+
+#main .endGame .result .resultOptions .resultOptionsWord .wordSelected {
+margin-bottom: 0;
+}
+
+#main #gameOptions .selector {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.letterButton {
+    width:150px;
+    font-family: "Nanum Pen Script", cursive;
+        font-weight: 400;
+        font-size: 2rem;
+}
+
+.endGame {
+
+    display: flex;
+    align-items: center;    
+    justify-content: center; 
+    align-items: end;
 }
 
 #main #selectTypeWord {

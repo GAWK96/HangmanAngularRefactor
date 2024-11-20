@@ -1,47 +1,69 @@
 <div id="main">
-  <div id="selectTypeWord">
-  <div id="selector">
+  <div id="gameOptions">
+  <div class="selector">
       <h1 style="margin: 5px">Choose a category</h1><br>
     <!-- <label for="options">Choose an type of word:</label><br> -->
-    <select [(ngModel)]="selectedOption" (change)="onSelectWordChange()" [disabled]="disableWordSelected" id="options">
+    <select [(ngModel)]="selectedOption" (change)="onSelectWordChange()" [disabled]="disableWordSelected" class="letterButton">
       <option *ngFor="let option of options" [value]="option">{{ option }}</option>
     </select>
-    <button (click) = "getRandomWord()" [disabled]="disableWordSelected">Play!</button>
+    <button class="letterButton" (click) = "wordConstruction()" [disabled]="disableWordSelected || checkEmpty">Play!</button>
     </div>
-    </div>
-    <div id="selector">
+    <div class="selector">
       <h1 style="margin: 5px">Choose a letter</h1><br>
-    <!-- <label for="options">Choose an option:</label> -->
-    <select [(ngModel)]="selectedLetter" (change)="onSelectLetterChange()" id="options">
+    <select [(ngModel)]="selectedLetter" (change)="onSelectLetterChange()" [disabled]="disableLetterSelect" class="letterButton">
       <option *ngFor="let letter of letters" [value]="letter" [disabled] = "isLetterDisabled(letter)"> 
         {{ letter }}</option>
     </select>
-    <button (click)="checkRandomWord()" [disabled]="disableLetterSelect">Select letter!</button>
+    <button class="letterButton" (click)="checkRandomWord()" [disabled]="disableLetterSelect || checkEmpty">Letter!</button>
     </div>
+    </div>
+  <div class="endGame" *ngIf="count < 6 && (checkIfGuessed || unknownWord?.length === 0 || unknownWord.length > 0) && stillPlaying"><img [src]="'assets/HANG' + count + '.png'" alt="">
+    <h1>{{unknownWord}}</h1>
   </div>
-  <div *ngIf="count < 6 && (checkIfGuessed || unknownWord?.length === 0 || unknownWord.length > 0) && stillPlaying"><img [src]="'assets/HANG' + count + '.png'" alt="">
-    <div>{{unknownWord}}</div>
-  </div>
-    {{ checkIfGuessed }}
+    <!-- {{ checkIfGuessed }}
     {{ count }}
-    {{ stillPlaying }}
-  <!-- <div *ngIf="count >= 6" id="endGame">
-    <div><h1>Oh no! Try again!</h1></div>
-    <img src="assets/endGame.png" alt=""></div> -->
-  <div *ngIf="count >= 6 && checkIfGuessed" id="endGame">
+    {{ stillPlaying }} -->
+  <div *ngIf="count >= 6 && checkIfGuessed" class="endGame">
     <div>
-      <h1>Oh no! Try again!</h1>
-      <button (click)='reloadPage()'>Play again!</button>
-      <button (click)='goToHome()'>Go to home page!</button>
+      <img src="assets/endGame.png" alt="">
     </div>
-    <img src="assets/endGame.png" alt="">
+    <div class="result">
+      <div class="message">
+          <h1>Oh no! Try again!</h1>
+      </div>
+      <div class="resultOptions">
+        <div class="resultOptionsButtons">
+                <button class="letterButton" (click)='reloadPage()' class="letterButton" style="font-size: 2rem; width: 150px; margin-bottom: 10px;">Play again!</button>
+                <button class="letterButton" (click)='goToHome()' class="letterButton" style="font-size: 2rem; width: 150px; margin-bottom: 10px;">Home page!</button>
+        </div>
+            <div class="resultOptionsWord">
+                <h2 class="wordSelected">Word selected:</h2> {{selectedWord}}
+            </div>
+      </div>
   </div>
-  <div *ngIf="count < 6 && !checkIfGuessed && !stillPlaying" id="endGame">
-    <div>
-      <h1>Guessed it! Congrats!</h1>
-      <button (click)='reloadPage()'>Play again!</button>
-      <button (click)='goToHome()'>Go to home page!</button>
+  </div>
+    <div *ngIf="count < 6 && !checkIfGuessed && !stillPlaying" class="endGame">
+      <div>
+        <img src="assets/hangmann_balloons_game.png" alt="">
+      </div>
+      <div class="result">
+        <div class="message" style="height: 120px;">
+          <h1>Guessed it! Congrats!</h1>
+        </div>
+        <div class="resultOptions">
+          <div class="resultOptionsButtons">
+            <button (click)='reloadPage()' class="letterButton" style="font-size: 2rem; width: 150px; margin-bottom: 10px;">Play again!</button>
+            <button (click)='goToHome()' class="letterButton" style="font-size: 2rem; width: 150px;">Home page!</button>
+          </div>
+          <div class="resultOptionsWord">
+            <h2 class="wordSelected">Word selected:</h2> {{selectedWord}}
+          </div>
+        </div>
+      </div>
     </div>
-    <img src="assets/hangmann_balloons_game.png" alt="">
     </div>
-  {{ 'assets/HANG' + count + '.png' }}
+  <!-- {{ 'assets/HANG' + count + '.png' }}
+  {{count}}
+  {{checkIfGuessed}}
+  {{stillPlaying}} -->
+ 

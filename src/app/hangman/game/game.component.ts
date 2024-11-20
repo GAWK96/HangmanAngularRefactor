@@ -24,6 +24,8 @@ export class GameComponent implements OnInit {
   selectedOption: string = ''
   selectedWord: string = ''
   selectedLetter: string = ''
+  checkEmpty!: boolean 
+  checkWordEmpty!: boolean
   lettersSelected: string[] = []
   unknownWord: string[] = []
   disableWordSelected: boolean = false
@@ -38,6 +40,7 @@ export class GameComponent implements OnInit {
   {
     this.stillPlaying = true  
     this.disableLetterSelect = true
+    this.checkEmpty = true
   }
 
   getRandomInt(min: number, max: number): number {
@@ -45,23 +48,60 @@ export class GameComponent implements OnInit {
   }
   
   onSelectWordChange(): string {
-    // console.log(this.selectedOption)
+    this.checkIfEmpty(this.selectedOption)
     return this.selectedOption
   }
+
+    checkIfEmpty(word: string): boolean {
+      this.checkEmpty = word.length > 0 ? false : true
+      console.log('this.checkEmpty',this.checkEmpty)
+    return this.checkEmpty
+  }
+
   onSelectLetterChange() {
+    this. checkIfEmpty(this.selectedLetter)
     console.log(this.selectedLetter)
     return this.selectedLetter
   }
+  wordConstruction(): string[] {
+    // this.unknownWord = []
+    // let randomNumber = this.getRandomInt(1, 4)
+    // let message: string
+    // switch (this.selectedOption)
+    // {
+    //   case 'Food':
+    //     message = this.food[randomNumber]
+    //     this.selectedWord = message
+    //     // return message;
+    //     break;
+      
+    //   case 'Animal':
+    //     message = this.animal[randomNumber]
+    //     this.selectedWord = message
+    //     // return message
+    //     break;
+      
+    //   case 'Country':
+    //     message = this.country[randomNumber]
+    //     this.selectedWord = message
+    //     // return message
+    //     break;
+      
+    //   default:
+    //     message = 'Unknown word'
+    //     break
+    // }
+    let word = this.getWord()
+    this.setUnknownWord(word)
+    this.checkIfEmpty('')
+    this.disableWordSelected = true
+    this.disableLetterSelect = false
+    return this.unknownWord
+  }
 
-  // setBlankSpace(): string {
-  //   if (this.selectedLetter) {
-  //     return this.selectedLetter = ''
-  //   }
-  //   return this.selectedLetter
-  // }
-  getRandomWord(): string[] {
+  getWord(): string {
     this.unknownWord = []
-    var randomNumber = this.getRandomInt(1, 4)
+    let randomNumber = this.getRandomInt(1, 4)
     let message: string
     switch (this.selectedOption)
     {
@@ -87,19 +127,10 @@ export class GameComponent implements OnInit {
         message = 'Unknown word'
         break
     }
-    // console.log(message)
-    this.constructUnkownWord(message)
-    // console.log(this.unknownWord)
-    this.disableWordSelected = true
-    this.disableLetterSelect = false
-    return this.unknownWord
+    return message
   }
-
-  //   getSelectedWord(): string[] {
-  //     return ['A','B']
-  //  } 
   
-  constructUnkownWord(word:string): string[] {
+  setUnknownWord(word:string): string[] {
     for (var i = 0; i < word.length; i++)
     {
         this.unknownWord.push('_')
@@ -115,7 +146,7 @@ export class GameComponent implements OnInit {
     this.checkIfWordWasGuessed(this.unknownWord)
     this.letterMatch = 0
     setTimeout(() => {
-    this.selectedLetter = ''; // Reset the selection
+    this.selectedLetter = ''; 
   }, 0);
     return this.unknownWord
   }
@@ -128,6 +159,7 @@ export class GameComponent implements OnInit {
       this.letterMatch = this.letterMatch + 1
     }
     }
+    this.checkIfEmpty('')
   }
   checkIfWordWasGuessed(array: string[]): boolean {
     this.checkIfGuessed = array.includes('_')

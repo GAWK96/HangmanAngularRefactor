@@ -52,45 +52,19 @@ export class GameComponent implements OnInit {
     return this.selectedOption
   }
 
+    onSelectLetterChange() {
+    this.checkIfEmpty(this.selectedLetter)
+    console.log(this.selectedLetter)
+    return this.selectedLetter
+  }
+
     checkIfEmpty(word: string): boolean {
       this.checkEmpty = word.length > 0 ? false : true
       console.log('this.checkEmpty',this.checkEmpty)
     return this.checkEmpty
   }
 
-  onSelectLetterChange() {
-    this. checkIfEmpty(this.selectedLetter)
-    console.log(this.selectedLetter)
-    return this.selectedLetter
-  }
   wordConstruction(): string[] {
-    // this.unknownWord = []
-    // let randomNumber = this.getRandomInt(1, 4)
-    // let message: string
-    // switch (this.selectedOption)
-    // {
-    //   case 'Food':
-    //     message = this.food[randomNumber]
-    //     this.selectedWord = message
-    //     // return message;
-    //     break;
-      
-    //   case 'Animal':
-    //     message = this.animal[randomNumber]
-    //     this.selectedWord = message
-    //     // return message
-    //     break;
-      
-    //   case 'Country':
-    //     message = this.country[randomNumber]
-    //     this.selectedWord = message
-    //     // return message
-    //     break;
-      
-    //   default:
-    //     message = 'Unknown word'
-    //     break
-    // }
     let word = this.getWord()
     this.setUnknownWord(word)
     this.checkIfEmpty('')
@@ -108,19 +82,16 @@ export class GameComponent implements OnInit {
       case 'Food':
         message = this.food[randomNumber]
         this.selectedWord = message
-        // return message;
         break;
       
       case 'Animal':
         message = this.animal[randomNumber]
         this.selectedWord = message
-        // return message
         break;
       
       case 'Country':
         message = this.country[randomNumber]
         this.selectedWord = message
-        // return message
         break;
       
       default:
@@ -152,7 +123,6 @@ export class GameComponent implements OnInit {
   }
   updateUnknownWord() {
     for (var i: number = 0; i < this.unknownWord.length; i++) {
-    // var updateUnknownWord = this.unknownWord
     if (this.selectedWord.charAt(i) === this.selectedLetter)
     {
       this.unknownWord[i] = this.selectedLetter
@@ -169,7 +139,6 @@ export class GameComponent implements OnInit {
 
   updateSelectedLetters(letter: string): string[] {
     this.lettersSelected.push(letter)
-    // console.log(this.lettersSelected)
     return this.lettersSelected
   } 
   checkIfLetterMatch(value: number): number{

@@ -30,6 +30,11 @@ body {
 #homePage #angularLogo {
     display: flex;
     flex-direction: row;
+    margin-top: auto;
+}
+
+#homePage #hangmannImg {
+    margin-top: 180px;
 }
 
 #homePage #angularLogo h1 {

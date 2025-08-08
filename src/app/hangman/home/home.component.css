@@ -26,3 +26,16 @@ body {
         width: 100px;
         font-size: 2rem;
 }
+
+#homePage #angularLogo {
+    display: flex;
+    flex-direction: row;
+}
+
+#homePage #angularLogo h1 {
+    align-self: center;
+}
+
+#homePage #angularLogo #logo {
+    width: 300px; 
+}
